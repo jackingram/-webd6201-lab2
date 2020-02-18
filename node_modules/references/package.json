@@ -1,0 +1,27 @@
+{
+  "name": "references",
+  "version": "0.0.0",
+  "description": "Providing references to your React components from one single location",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require setup-env test/*.test.js"
+  },
+  "author": "Arnout Kazemier",
+  "license": "MIT",
+  "setup": {
+    "babel": {
+      "configFile": "./test/.babelrc"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
+    "assume": "^2.2.0",
+    "jsdom": "^11.12.0",
+    "mocha": "^6.1.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "setup-env": "^1.2.2"
+  }
+}
