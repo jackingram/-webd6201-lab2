@@ -9,6 +9,18 @@ class Contact
     }
 }
 
+class User
+{
+    constructor(firstName = "", lastName = "", username = "", emailAddress = "", password = "")
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+       this.emailAddress = emailAddress;
+       this.username = username;
+       this.password = password;
+    }
+}
+
 
 
 
@@ -22,6 +34,7 @@ let app;
     // Declare Function Variables here...
     console.log("%cDeclaring Variables", "color: red;")
     let contactObject = new Contact();
+    let userObject = new User();
     /**
      * Variable initialization in this function
      *
@@ -268,14 +281,126 @@ let app;
     {
         //insert error thingy
         document.title = "WEBD6201 - Register";
+
+        function clearForm()
+        {
+            //document.getElementById("contactForm").reset();
+            $("#registerForm")[0].reset();
+            $("#errorMessage").hide();
+        }
+
         let errorDiv = document.createElement("div");
         errorDiv.className = "alert alert-danger";
-        errorDiv.id = "ErrorMessages";
+        errorDiv.id = "ErrorMessage";
         
         let beforeThis = document.getElementById("registerForm");
         let beforeThisParent = document.getElementById("contentArea");
 
         beforeThisParent.insertBefore(errorDiv, beforeThis);
+
+       
+
+        function validateInput(selector, condition, errorMessage)
+        {
+            if(condition)
+            {
+                $("#ErrorMessage").show();
+                $("#ErrorMessage").text(errorMessage);
+                $(selector).select();
+                $(selector).css("border", "2px solid red");
+            }
+            else
+            {
+                $("#ErrorMessage").hide();
+                $(selector).css("border", "1px solid #ced4da");
+            }
+        }
+
+        $("#ErrorMessage").hide();
+        $("#FirstName").select();
+
+        //first name events
+        $("#FirstName").blur((e)=>
+        {
+            validateInput("#FirstName",( $("#FirstName").val().length < 2),"First Name is Too Short");
+        });
+
+        $("#FirstName").focus((e)=>
+        {
+            $("#FirstName").select();
+        });
+
+        //last name events
+         $("#lastName").blur((e)=>
+         {
+             validateInput("#lastName",( $("#lastName").val().length < 2),"last Name is Too Short");
+         });
+ 
+         $("#lastName").focus((e)=>
+         {
+             $("#lastName").select();
+         });
+
+         // Email Events
+        $("#emailAddress").blur((e)=>
+        {
+            validateInput("#emailAddress",($("#emailAddress").val().length < 8) || (!$("#emailAddress").val().includes("@")),"Invalid Email Address");
+        });
+
+        $("#emailAddress").focus((e)=>
+        {
+            $("#emailAddress").select();
+        });
+
+        //password events
+        $("#password").blur((e)=>
+        {
+            validateInput("#password",( $("#password").val().length < 6),"password is Too Short");
+        });
+
+        $("#password").focus((e)=>
+        {
+            $("#password").select();
+        });
+
+         //confirm password events
+         $("#confirmPassword").blur((e)=>
+         {
+             validateInput("#confirmPassword",( $("#confirmPassword").val() != $("#password").val()),"passwords do not match");
+         });
+ 
+         $("#confirmPassword").focus((e)=>
+         {
+             $("#confirmPassword").select();
+         });
+
+         $("#registerForm").submit  ((e)=>
+         {
+           e.preventDefault();
+
+           let firstName = $("#FirstName").val();
+           let lastName = $("#lastName").val();
+           let emailAddress = $("#emailAddress").val();
+           let password = $("#password").val();
+
+           console.log(`First Name: ${firstName}`);
+           console.log(`Last Name: ${lastName}`);
+           console.log(`Email Address: ${emailAddress}`);
+           console.log(`Password: ${password}`);
+
+           userObject.firstName = firstName;
+           userObject.lastName = lastName;
+           userObject.username = "";
+           userObject.emailAddress = emailAddress;
+           userObject.password = password;
+
+           console.log(userObject);
+
+           clearForm();
+         });
+
+
+
     }
 
     /**
