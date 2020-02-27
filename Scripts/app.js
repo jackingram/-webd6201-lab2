@@ -1,3 +1,9 @@
+/*
+* Name: Jack Ingram
+* Student ID: 100710241
+* Date Completed: Feb 27th 2020
+*/
+
 class Contact
 {
     constructor(contactName = "", emailAddress = "", contactNumber = "", contactMessage = "")
@@ -254,9 +260,10 @@ let app;
     {
         document.title = "WEBD6201 - Login";
         
-          //insert username into the navbar between contact and logout / login
+         
           $("#loginForm").submit  ((e)=>
         {
+          //insert username into the navbar between contact and login/ logout
           let usernameInput = $("#userName").val();
           let passwordInput = $("#password").val();
 
@@ -282,13 +289,14 @@ let app;
         //insert error thingy
         document.title = "WEBD6201 - Register";
 
+        //function to clear form and hide error messages
         function clearForm()
         {
-            //document.getElementById("contactForm").reset();
             $("#registerForm")[0].reset();
             $("#errorMessage").hide();
         }
 
+        //create a new div element for error messages in our registration form
         let errorDiv = document.createElement("div");
         errorDiv.className = "alert alert-danger";
         errorDiv.id = "ErrorMessage";
@@ -296,10 +304,12 @@ let app;
         let beforeThis = document.getElementById("registerForm");
         let beforeThisParent = document.getElementById("contentArea");
 
+        //insert div element in main content before the form is initialized
         beforeThisParent.insertBefore(errorDiv, beforeThis);
 
        
-
+        // function to validate input and use our error message div to output any errors
+        // also highlights the field that is erroring
         function validateInput(selector, condition, errorMessage)
         {
             if(condition)
@@ -316,7 +326,9 @@ let app;
             }
         }
 
+        //hide errors
         $("#ErrorMessage").hide();
+        //select (prompt) first name field.
         $("#FirstName").select();
 
         //first name events
@@ -374,6 +386,7 @@ let app;
              $("#confirmPassword").select();
          });
 
+         //submit button event
          $("#registerForm").submit  ((e)=>
          {
            e.preventDefault();
