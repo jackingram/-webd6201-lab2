@@ -22,7 +22,6 @@ let app;
     // Declare Function Variables here...
     console.log("%cDeclaring Variables", "color: red;")
     let contactObject = new Contact();
-
     /**
      * Variable initialization in this function
      *
@@ -241,15 +240,91 @@ let app;
     function DisplayLoginContent()
     {
         document.title = "WEBD6201 - Login";
+        
+        function clearLoginForm()
+        {
+            //document.getElementById("loginForm").reset();
+            $("#loginForm")[0].reset();
+            $("#loginErrorMessage").hide();
+        }
+
+        function validateLoginInput(selector, condition, loginErrorMessage)
+        {
+            $("#loginErrorMessag").hide();
+            if(condition)
+            {
+                $("#loginErrorMessage").show();
+                $("#loginErrorMessage").text(loginErrorMessage);
+                $(selector).select();
+                $(selector).css("border", "2px solid red");
+            }
+            else
+            {
+                $("#loginErrorMessag").hide();
+                $(selector).css("border", "1px solid #ced4da");
+            }
+        }
+
+       $("#loginErrorMessage").hide();
+       $("#userName").select();
+
+       //Username Events
+       $("#userName").blur((e)=>
+        {
+            validateLoginInput("#userName",( $("#userName").val().length < 2),"Username must be more than 1 character.");
+        });
+
+        $("#userName").focus((e)=>
+        {
+            $("#userName").select();
+        });
+
+         // Password Events
+         $("#password").blur((e)=>
+         {
+             validateLoginInput("#password",($("#password").val().length < 8),"Password must be atleast 8 characters.");
+         });
+ 
+         $("#password").focus((e)=>
+         {
+             $("#password").select();
+         });
+
 
         $("#loginForm").submit  ((e)=>
         {
-           
-            e.preventDefault();
-            e.stopPropagation();
-            $("#loginForm")[0].reset();
+            if(document.getElementById("loginForm").checkValidity() == false)
+            {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("form not valid");
+            }
+
+            //store values
+            let usernameInput = $("#userName").val();
+            let passwordInput = $("#password").val();
+
+            //show values stores
+            console.log(usernameInput);
+            console.log(passwordInput);
+
+            
+            
+             clearLoginForm();
             $("#login").hide();
             $("#logout").show();
+
+            //insert username into the navbar between contact and logout / login
+            let navElement = document.getElementById("contact");
+            let clonedNavElement = navElement.cloneNode(true);
+            clonedNavElement.id = 'usernameNav';
+            clonedNavElement.lastChild.href = '#';
+            clonedNavElement.lastChild.textContent = usernameInput;
+
+            navElement.after(clonedNavElement);
+
+         
+            console.log(navElement);
 
         });
 

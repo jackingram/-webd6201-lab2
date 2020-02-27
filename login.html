@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="./Content/app.css">
-    <title>Login</title>
+    <title>WEBD6201 - Login</title>
 </head>
 <body>
     <!-- Main Nav -->
@@ -36,26 +36,21 @@
               <div class="offset-md-3 col-md-6 col-sm-12">
                     <div class="login" id="contentArea">
                         <h1 class="display-4">Login</h1>
-                        <form id="loginForm" novalidate>
-                          
+                        <div id="loginErrorMessage" class="alert alert-danger">
+                          This is where the error message goes...
+                        </div>
+                        <form id="loginForm" novalidate onsubmit= "return false">
                           <div class="form-group">
                             <div class="input-group">
-                              <span class="input-group-addon">
-                                <i class="fa fa-user">
-                                </i>
-                              </span>
-                              <input type="text" class="form-control" id="contactName" name="userName"  required
+                              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                              <input type="text" class="form-control" id="userName" name="userName"  required
                               value="" placeholder="Enter your username">
                             </div>
-                           
                           </div>
 
                           <div class="form-group">
                             <div class="input-group">
-                              <span class="input-group-addon">
-                                <i class="fa fa-lock">
-                                </i>
-                              </span>
+                              <span class="input-group-addon"> <i class="fa fa-lock"> </i> </span>
                               <input type="password" class="form-control" id="password" name="password"  required
                               value="" placeholder="Enter your password">
                             </div>
