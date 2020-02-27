@@ -241,98 +241,41 @@ let app;
     {
         document.title = "WEBD6201 - Login";
         
-        function clearLoginForm()
+          //insert username into the navbar between contact and logout / login
+          $("#loginForm").submit  ((e)=>
         {
-            //document.getElementById("loginForm").reset();
-            $("#loginForm")[0].reset();
-            $("#loginErrorMessage").hide();
-        }
+          let usernameInput = $("#userName").val();
+          let passwordInput = $("#password").val();
 
-        function validateLoginInput(selector, condition, loginErrorMessage)
-        {
-            $("#loginErrorMessag").hide();
-            if(condition)
-            {
-                $("#loginErrorMessage").show();
-                $("#loginErrorMessage").text(loginErrorMessage);
-                $(selector).select();
-                $(selector).css("border", "2px solid red");
-            }
-            else
-            {
-                $("#loginErrorMessag").hide();
-                $(selector).css("border", "1px solid #ced4da");
-            }
-        }
+          let navElement = document.getElementById("contact");
+          let clonedNavElement = navElement.cloneNode(true);
+          clonedNavElement.id = 'usernameNav';
+          clonedNavElement.lastChild.href = '#';
+          clonedNavElement.lastChild.textContent = usernameInput;
 
-       $("#loginErrorMessage").hide();
-       $("#userName").select();
+          navElement.after(clonedNavElement);
 
-       //Username Events
-       $("#userName").blur((e)=>
-        {
-            validateLoginInput("#userName",( $("#userName").val().length < 2),"Username must be more than 1 character.");
-        });
-
-        $("#userName").focus((e)=>
-        {
-            $("#userName").select();
-        });
-
-         // Password Events
-         $("#password").blur((e)=>
-         {
-             validateLoginInput("#password",($("#password").val().length < 8),"Password must be atleast 8 characters.");
-         });
- 
-         $("#password").focus((e)=>
-         {
-             $("#password").select();
-         });
-
-
-        $("#loginForm").submit  ((e)=>
-        {
-            if(document.getElementById("loginForm").checkValidity() == false)
-            {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log("form not valid");
-            }
-
-            //store values
-            let usernameInput = $("#userName").val();
-            let passwordInput = $("#password").val();
-
-            //show values stores
-            console.log(usernameInput);
-            console.log(passwordInput);
-
-            
-            
-             clearLoginForm();
-            $("#login").hide();
-            $("#logout").show();
-
-            //insert username into the navbar between contact and logout / login
-            let navElement = document.getElementById("contact");
-            let clonedNavElement = navElement.cloneNode(true);
-            clonedNavElement.id = 'usernameNav';
-            clonedNavElement.lastChild.href = '#';
-            clonedNavElement.lastChild.textContent = usernameInput;
-
-            navElement.after(clonedNavElement);
-
-         
-            console.log(navElement);
+          e.preventDefault();
+          e.stopPropagation();
+          $("#loginForm")[0].reset();
+          $("#login").hide();
+          $("#logout").show();
 
         });
-
     }
 
     function DisplayRegisterContent()
     {
+        //insert error thingy
         document.title = "WEBD6201 - Register";
+        let errorDiv = document.createElement("div");
+        errorDiv.className = "alert alert-danger";
+        errorDiv.id = "ErrorMessages";
+        
+        let beforeThis = document.getElementById("registerForm");
+        let beforeThisParent = document.getElementById("contentArea");
+
+        beforeThisParent.insertBefore(errorDiv, beforeThis);
     }
 
     /**
