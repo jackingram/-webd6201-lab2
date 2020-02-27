@@ -1,9 +1,9 @@
 {
-  "name": "webd6201-lesson6",
+  "name": "webd6201-lab2",
   "version": "1.0.0",
-  "description": "Demo Project for WEBD6201 - Lesson 6",
+  "description": "lab 2 for WEBD6201",
   "main": "app.js",
-  "author": "Tom Tsiliopoulos",
+  "author": "Jack Ingram",
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.0",
